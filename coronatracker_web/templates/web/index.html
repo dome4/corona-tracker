@@ -71,66 +71,28 @@
                 <!-- USERS LIST -->
                 <div style="margin-bottom: 0;">
                   <div class="card-header">
-                    <h3 class="card-title">Corona Tracker - Tu, 22.09.20</h3>
+                    <h3 class="card-title">Corona Tracker - {{today | date:"D, j.m.y"}}</h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
                     <ul class="users-list clearfix">
-                      <li>
-                        <img
-                          src="{% static 'dist/img/user1-128x128.jpg' %}"
-                          alt="User Image"
-                        />
-                        <a class="users-list-name" href="#">Alexander Pierce</a>
-                      </li>
-                      <li>
-                        <img
-                          src="{% static 'dist/img/user8-128x128.jpg' %}"
-                          alt="User Image"
-                        />
-                        <a class="users-list-name" href="#">Norman</a>
-                      </li>
-                      <li>
-                        <img
-                          src="{% static 'dist/img/user7-128x128.jpg' %}"
-                          alt="User Image"
-                        />
-                        <a class="users-list-name" href="#">Jane</a>
-                      </li>
-                      <li>
-                        <img
-                          src="{% static 'dist/img/user6-128x128.jpg' %}"
-                          alt="User Image"
-                        />
-                        <a class="users-list-name" href="#">John</a>
-                      </li>
-                      <li>
-                        <img
-                          src="{% static 'dist/img/user2-160x160.jpg' %}"
-                          alt="User Image"
-                        />
-                        <a class="users-list-name" href="#">Alexander</a>
-                      </li>
-                      <li>
-                        <img
-                          src="{% static 'dist/img/user5-128x128.jpg' %}"
-                          alt="User Image"
-                        />
-                        <a class="users-list-name" href="#">Sarah</a>
-                      </li>
-                      <li>
-                        <img
-                          src="{% static 'dist/img/user4-128x128.jpg' %}"
-                          alt="User Image"
-                        />
-                        <a class="users-list-name" href="#">Nora</a>
-                      </li>
+
+                      {% for user in users %} 
+                        <li>
+                          <img
+                            src="{% static 'dist/img/user1-128x128.jpg' %}"
+                            alt="User Image"
+                          />
+                          <a class="users-list-name" href="#">{{user.name}}</a>
+                        </li>
+                      {% endfor %} 
+                    
                       <li>
                         <img
                           src="{% static 'add-outline.svg' %}"
                           alt="User Image"
                         />
-                        <a class="users-list-name" href="#">Nadia</a>
+                        <a class="users-list-name" href="#">Add</a>
                       </li>
                     </ul>
                     <!-- /.users-list -->
@@ -153,12 +115,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>Dome4</td>
-                    </tr>  
-                    <tr>
-                      <td>Dome1</td>
-                    </tr>                  
+                      {% for record in recordings %} 
+                        <tr>
+                          <td>{{record.user.name}}</td>
+                          <!-- <td>{{record.user.img_url}}</td> -->
+                        </tr>  
+                      {% endfor %}                       
                     </tbody>
                   </table>
                 </div>

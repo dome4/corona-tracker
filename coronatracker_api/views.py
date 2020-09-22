@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 
 from coronatracker_api.models import RecordableUser, Recording
-from coronatracker_api.serializers import RecordableUserSerializer, RecordableUserSerializer
+from coronatracker_api.serializers import RecordableUserSerializer, RecordingSerializer
 
 # Create your views here.
 
@@ -21,4 +21,4 @@ class RecordingViewSet(viewsets.ModelViewSet):
     API endpoint that allows Recording to be viewed or edited.
     """
     queryset = Recording.objects.all()
-    serializer_class = RecordableUserSerializer
+    serializer_class = RecordingSerializer
