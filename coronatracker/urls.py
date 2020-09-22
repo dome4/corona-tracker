@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+from coronatracker_api import views
+
+router = routers.DefaultRouter()
+router.register(r'recordable-users', views.RecordableUserViewSet)
+router.register(r'recordings', views.RecordingViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('coronatracker_web.urls'))
+    path('', include('coronatracker_web.urls')),
+    path('', include(router.urls))
 ]
