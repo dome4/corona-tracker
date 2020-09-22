@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'coronatracker_api',
+    'coronatracker_web',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
