@@ -1,0 +1,65 @@
+[
+  {
+    "model": "coronatracker_api.recordableuser",
+    "pk": 1,
+    "fields": {
+      "name": "Dome4",
+      "created_on": "2020-09-22T14:28:08.516Z",
+      "img_url": "https://loremflickr.com/128/128"
+    }
+  },
+  {
+    "model": "coronatracker_api.recordableuser",
+    "pk": 2,
+    "fields": {
+      "name": "Dome1",
+      "created_on": "2020-09-22T14:28:12.677Z",
+      "img_url": "https://loremflickr.com/128/128"
+    }
+  },
+  {
+    "model": "coronatracker_api.recordableuser",
+    "pk": 3,
+    "fields": {
+      "name": "Julian",
+      "created_on": "2020-09-22T14:28:16.080Z",
+      "img_url": "https://loremflickr.com/128/128"
+    }
+  },
+  {
+    "model": "coronatracker_api.recordableuser",
+    "pk": 4,
+    "fields": {
+      "name": "Chris",
+      "created_on": "2020-09-22T14:28:19.231Z",
+      "img_url": "https://loremflickr.com/128/128"
+    }
+  },
+  {
+    "model": "coronatracker_api.recordableuser",
+    "pk": 5,
+    "fields": {
+      "name": "Marvin",
+      "created_on": "2020-09-22T14:28:22.476Z",
+      "img_url": "https://loremflickr.com/128/128"
+    }
+  },
+  {
+    "model": "coronatracker_api.recordableuser",
+    "pk": 6,
+    "fields": {
+      "name": "Paul",
+      "created_on": "2020-09-22T14:28:25.200Z",
+      "img_url": "https://loremflickr.com/128/128"
+    }
+  },
+  {
+    "model": "coronatracker_api.recordableuser",
+    "pk": 7,
+    "fields": {
+      "name": "Silas",
+      "created_on": "2020-09-22T14:28:41.431Z",
+      "img_url": "https://loremflickr.com/128/128"
+    }
+  }
+]

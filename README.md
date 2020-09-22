@@ -8,6 +8,11 @@
 4. Show which migrations exist: `python manage.py showmigrations`
 5. And now, each time you edit your models, run in your container: `python manage.py makemigrations` and `python manage.py migrate`
 
+## Seed database
+
+1. Log into django container
+2. Exec `python manage.py loaddata coronatracker_api/seed/0001_RecordableUser.json`
+
 ## Creating an admin user¶
 
 1. First we’ll need to create a user who can login to the admin site. Run the following command: `python manage.py createsuperuser`
