@@ -57,6 +57,13 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700' %}"
       rel="stylesheet"
     />
+
+    <style>
+      .users-list > li{
+        width: 140px;
+        height: 170px;
+      }
+    </style>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">    
@@ -295,7 +302,7 @@
         userString += `<img src="/static/dist/img/user1-128x128.jpg" alt="User Image" />`
        }
       
-      userString += `<p class="users-list-name">${user.name}</p></a></li>`
+      userString += `<p class="users-list-name"><b>${user.name}</b></p></a></li>`
 
       $('#users-list').append(userString);
 

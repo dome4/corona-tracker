@@ -5,7 +5,7 @@
     "fields": {
       "name": "Dome4",
       "created_on": "2020-09-22T14:28:08.516Z",
-      "img_url": "https://loremflickr.com/128/128"
+      "img_url": "/static/img/dome4.jpg"
     }
   },
   {
@@ -14,7 +14,7 @@
     "fields": {
       "name": "Dome1",
       "created_on": "2020-09-22T14:28:12.677Z",
-      "img_url": "https://loremflickr.com/128/128"
+      "img_url": "/static/img/dome1.jpeg"
     }
   },
   {
@@ -23,7 +23,7 @@
     "fields": {
       "name": "Julian",
       "created_on": "2020-09-22T14:28:16.080Z",
-      "img_url": "https://loremflickr.com/128/128"
+      "img_url": "/static/img/julian.jpeg"
     }
   },
   {
@@ -32,7 +32,7 @@
     "fields": {
       "name": "Chris",
       "created_on": "2020-09-22T14:28:19.231Z",
-      "img_url": "https://loremflickr.com/128/128"
+      "img_url": "/static/img/chris.jpeg"
     }
   },
   {
@@ -41,7 +41,7 @@
     "fields": {
       "name": "Marvin",
       "created_on": "2020-09-22T14:28:22.476Z",
-      "img_url": "https://loremflickr.com/128/128"
+      "img_url": "/static/img/marvin.jpeg"
     }
   },
   {
@@ -50,7 +50,7 @@
     "fields": {
       "name": "Paul",
       "created_on": "2020-09-22T14:28:25.200Z",
-      "img_url": "https://loremflickr.com/128/128"
+      "img_url": ""
     }
   },
   {
@@ -59,7 +59,7 @@
     "fields": {
       "name": "Silas",
       "created_on": "2020-09-22T14:28:41.431Z",
-      "img_url": "https://loremflickr.com/128/128"
+      "img_url": ""
     }
   }
 ]
