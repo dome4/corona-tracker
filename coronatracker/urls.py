@@ -25,5 +25,6 @@ router.register(r'recordings', views.RecordingViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('coronatracker_web.urls')),
+    path('', include('coronatracker_api.urls')),
     path('', include(router.urls))
 ]

@@ -6,10 +6,16 @@ from django.db import models
 class RecordableUser(models.Model):
     name = models.CharField(max_length=200)
     created_on = models.DateTimeField(auto_now_add=True)
-    img_url = models.URLField()
+    img_url = models.URLField(blank=True, null=True)
 
 
 class Recording(models.Model):
     user = models.ForeignKey(RecordableUser, on_delete=models.CASCADE)
     timestamp = models.DateField(auto_now_add=True)
     created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'timestamp'], name='unique_recording'),
+        ]
