@@ -1,371 +1,133 @@
-{% load static %}
+{% extends "./_base.html" %} {% block content %}
+<div class="container-fluid">
+  <!-- Main row -->
+  <div class="row">
+    <div class="col-9">
+      <!-- USERS LIST -->
+      <div style="margin-bottom: 0">
+        <div class="card-header">
+          <h3 class="card-title">
+            Corona Tracker - <span id="today-string"></span>
+          </h3>
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Corona Tracker</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="{% static 'plugins/fontawesome-free/css/all.min.css' %}"
-    />
-    <!-- Ionicons -->
-    <link
-      rel="stylesheet"
-      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
-    />
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="{% static 'plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
-    <!-- Tempusdominus Bbootstrap 4 -->
-    <link
-      rel="stylesheet"
-      href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}"
-    />
-    <!-- iCheck -->
-    <link
-      rel="stylesheet"
-      href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}"
-    />
-    <!-- JQVMap -->
-    <link
-      rel="stylesheet"
-      href="{% static 'plugins/jqvmap/jqvmap.min.css' %}"
-    />
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}" />
-    <!-- overlayScrollbars -->
-    <link
-      rel="stylesheet"
-      href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}"
-    />
-    <!-- Daterange picker -->
-    <link
-      rel="stylesheet"
-      href="{% static 'plugins/daterangepicker/daterangepicker.css' %}"
-    />
-    <!-- summernote -->
-    <link
-      rel="stylesheet"
-      href="{% static 'plugins/summernote/summernote-bs4.css' %}"
-    />
-    <!-- Google Font: Source Sans Pro -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700' %}"
-      rel="stylesheet"
-    />
-
-    <style>
-      .users-list > li{
-        width: 140px;
-        height: 170px;
-      }
-    </style>
-  </head>
-  <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">    
-
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" style="margin-left: 0;">
-
-        <!-- Main content -->
-        <section class="content">
-          <div class="container-fluid">
-            <!-- Main row -->
-            <div class="row">
-              <div class="col-9">
-                <!-- USERS LIST -->
-                <div style="margin-bottom: 0;">
-                  <div class="card-header" >
-                    <h3 class="card-title">Corona Tracker - <span id="today-string"></span></h3>
-
-                    <div class="card-tools">
-                      <button type="button" class="btn btn-secondary btn-xs" data-toggle="modal" data-target="#modal-default">
-                        <i class="fas fa-plus"></i>
-                        Add User
-                      </button>
-                    </div>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body p-0">
-                    <ul class="users-list clearfix" id="users-list"></ul>
-                    <!-- /.users-list -->
-                  </div>
-                  <!-- /.card-body -->
-                </div>
-                <!--/.card -->
-              </div>
-              <!-- /.col -->
-
-              <div class="col-3">
-                <!-- TABLE: LATEST ORDERS -->
-            <div>     
-              <div class="card-body p-0">
-                <div class="table-responsive">
-                  <table class="table m-0">
-                    <thead>
-                    <tr>
-                      <th style="border-top: 0; border-bottom: 1px solid rgba(0,0,0,.125); font-weight: 400;">Present today</th>
-                    </tr>
-                    </thead>
-                    <tbody id="recordTableBody">                     
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.table-responsive -->
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-              </div>
-            </div>
+          <div class="card-tools">
+            <button
+              type="button"
+              class="btn btn-secondary btn-xs"
+              data-toggle="modal"
+              data-target="#modal-default"
+            >
+              <i class="fas fa-plus"></i>
+              Add User
+            </button>
           </div>
-          <!-- /.container-fluid -->
-          <!-- modal -->
-          <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog" style="margin-top: 0.75rem;">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">Add User</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form role="form" id="add-user-form">
-                  <div class="modal-body">                
-                      <div class="card-body" style="padding: 0;">
-                        <div class="form-group">
-                          <label for="name">Name</label>
-                          <input type="text" class="form-control" id="add-user-name" placeholder="Enter name" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="img_url">Image</label>
-                          <input type="url" class="form-control" id="add-user-img_url" placeholder="Enter image url">
-                        </div>
-                      </div>
-                      <!-- /.card-body -->                  
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="onAddUserCancel()">
-                      <i class="fas fa-times"></i>
-                      Cancel
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                      <i class="fas fa-save"></i>
-                      Add
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-        </section>
-        <!-- /.content -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+          <ul class="users-list clearfix" id="users-list"></ul>
+          <!-- /.users-list -->
+        </div>
+        <!-- /.card-body -->
       </div>
-      <!-- /.content-wrapper -->
-    <!-- ./wrapper -->
+      <!--/.card -->
+    </div>
+    <!-- /.col -->
 
-    <!-- jQuery -->
-    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- ChartJS -->
-    <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
-    <!-- Sparkline -->
-    <script src="{% static 'plugins/sparklines/sparkline.js' %}"></script>
-    <!-- JQVMap -->
-    <script src="{% static 'plugins/jqvmap/jquery.vmap.min.js' %}"></script>
-    <script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="{% static 'plugins/jquery-knob/jquery.knob.min.js' %}"></script>
-    <!-- daterangepicker -->
-    <script src="{% static 'plugins/moment/moment.min.js' %}"></script>
-    <script src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{% static 'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
-    <!-- Summernote -->
-    <script src="{% static 'plugins/summernote/summernote-bs4.min.js' %}"></script>
-    <!-- overlayScrollbars -->
-    <script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
-    <!-- SweetAlert2 -->
-    <script src="{% static 'plugins/sweetalert2/sweetalert2.min.js' %}"></script>
-    <!-- AdminLTE App -->
-    <script src="{% static 'dist/js/adminlte.js' %}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{% static 'dist/js/pages/dashboard.js' %}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{% static 'dist/js/demo.js' %}"></script>
-
-    <script type="text/javascript">
-
-      // toast config
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
-      });
-
-      function addRecordForUser(userId){
-        if(!userId){
-          throw new Error('addRecordForUser - no user id')
-        }
-
-        $.ajax({
-              type: 'POST',
-              url: '/recordings/',
-              data: {
-                user: `/recordable-users/${userId}/`,
-              },
-              success: function(data){
-                loadRecordings();
-
-                Toast.fire({
-                  icon: 'success',
-                  title: 'Record successfully created'
-                })
-              },
-              error: function(err){
-                const errorText = 'duplicate key';
-
-                if(err.status === 500 && err.responseText.includes(errorText)){
-                  Toast.fire({
-                  icon: 'error',
-                  title: 'User is already present today'
-                })
-                }
-
-                Toast.fire({
-                  icon: 'error',
-                  title: 'Record could not be created'
-                })
-              }
-        })
-    }
-
-    function loadRecordings(){
-      $.ajax({
-              type: 'GET',
-              url: '/recordings-today/',
-              success: function(data){
-                updateRecordingList(data);
-              },
-              error: function(err){
-                console.log('error: ', err);
-              }
-        })
-    }
-
-    function updateRecordingList(records){
-
-      $('#recordTableBody').empty();
-
-      records.forEach((record) => {     
-       $('#recordTableBody').append(`<tr><td>${record.user_name}</td></tr>`);
-      });
-    }
-
-    function loadUsers(){
-      $.ajax({
-              type: 'GET',
-              url: '/recordable-users/',
-              success: function(data){
-                updateUserList(data);
-              },
-              error: function(err){
-                console.log('error: ', err);
-              }
-        })
-    }
-
-    function updateUserList(records){
-
-      $('#users-list').empty();
-
-      records.forEach((user) => {  
-       var userString = `<li><a href="javascript:addRecordForUser(${user.id})">`;
-
-       if(user && user.img_url){
-        userString += `<img src="${user.img_url}" alt="User Image" />`
-       } else {
-        userString += `<img src="/static/dist/img/user1-128x128.jpg" alt="User Image" />`
-       }
-      
-      userString += `<p class="users-list-name"><b>${user.name}</b></p></a></li>`
-
-      $('#users-list').append(userString);
-
-      });
-    }
-
-    // initial loading
-    loadRecordings();
-    loadUsers();
-    
-    
-    function onAddUserCancel(){
-      $('#add-user-form').trigger("reset");
-    }
-
-    // add user
-    $(document).ready(function(){
-        $("#add-user-form").submit(function(e){          
-            
-          e.preventDefault();
-
-          $.ajax({
-              type: 'POST',
-              url: '/recordable-users/',
-              data: {
-                'name': $('#add-user-name').val(),
-                'img_url': $('#add-user-img_url').val()
-              },
-              success: function(data){
-                console.log('users: ', data);
-
-                $('#modal-default').modal('hide')
-                $('#add-user-form').trigger("reset");
-
-                loadUsers();
-
-                Toast.fire({
-                  icon: 'success',
-                  title: 'User successfully created'
-                })
-              },
-              error: function(err){
-                console.log('error: ', err);
-
-                Toast.fire({
-                  icon: 'error',
-                  title: 'User could not be created'
-                })
-              }
-          })
-        });
-    });
-
-    function updateTodayString(){
-      $('#today-string').text(moment().format('ddd, D.M.YY'));
-    }
-    updateTodayString();
-
-    // update data every 15 mins
-    setInterval(function(){
-      loadRecordings();
-      updateTodayString();
-    }, 15*60*1000);
-    </script>
-  </body>
-</html>
+    <div class="col-3">
+      <!-- TABLE: LATEST ORDERS -->
+      <div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table m-0">
+              <thead>
+                <tr>
+                  <th
+                    style="
+                      border-top: 0;
+                      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                      font-weight: 400;
+                    "
+                  >
+                    Present today
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="recordTableBody"></tbody>
+            </table>
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->
+<!-- modal -->
+<div
+  class="modal fade"
+  id="modal-default"
+  style="display: none"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" style="margin-top: 0.75rem">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add User</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <form role="form" id="add-user-form">
+        <div class="modal-body">
+          <div class="card-body" style="padding: 0">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="add-user-name"
+                placeholder="Enter name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="img_url">Image</label>
+              <input
+                type="url"
+                class="form-control"
+                id="add-user-img_url"
+                placeholder="Enter image url"
+              />
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal"
+            onclick="onAddUserCancel()"
+          >
+            <i class="fas fa-times"></i>
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i>
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+{% endblock %}
