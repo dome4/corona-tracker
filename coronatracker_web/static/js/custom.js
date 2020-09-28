@@ -3,7 +3,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
-  timer: 3000,
+  timer: 4000,
 });
 
 function addRecordForUser(userId) {
@@ -49,6 +49,7 @@ function loadRecordings() {
     url: '/recordings-today/',
     success: function (data) {
       updateRecordingList(data);
+      addGesturesToRecords();
     },
     error: function (err) {
       console.log('error: ', err);
@@ -60,7 +61,9 @@ function updateRecordingList(records) {
   $('#recordTableBody').empty();
 
   records.forEach((record) => {
-    $('#recordTableBody').append(`<tr><td>${record.user_name}</td></tr>`);
+    $('#recordTableBody').append(
+      `<tr><td id="${record.id}">${record.user_name}</td></tr>`
+    );
   });
 }
 
@@ -150,3 +153,54 @@ setInterval(function () {
   loadRecordings();
   updateTodayString();
 }, 15 * 60 * 1000);
+
+function deleteRecordById(id) {
+  if (!id) {
+    throw new Error('delete record - id not found');
+  }
+
+  $.ajax({
+    type: 'DELETE',
+    url: `/recordings/${id}`,
+    success: function () {
+      // reload records list
+      loadRecordings();
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Record successfully deleted',
+      });
+    },
+    error: function (err) {
+      console.log('error: ', err);
+
+      Toast.fire({
+        icon: 'error',
+        title: 'Record could not be deleted',
+      });
+    },
+  });
+}
+
+/************************************************************/
+/************************* Gestures *************************/
+/************************************************************/
+
+function addGesturesToRecords() {
+  var records = document.getElementById('recordTableBody').childNodes;
+  for (const record of records) {
+    var hammertime = new Hammer(record);
+    hammertime.on('press', (event) => {
+      if (!event || !event.target || !event.target.id) {
+        throw new Error('record pressed - invalid event');
+      }
+
+      // open confirmation modal
+      if (confirm('Are you sure that you want to delete the record?')) {
+        // delete record
+        const idToDelete = event.target.id;
+        deleteRecordById(idToDelete);
+      }
+    });
+  }
+}

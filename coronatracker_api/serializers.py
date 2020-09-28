@@ -13,4 +13,4 @@ class RecordingSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Recording
-        fields = ['user', 'timestamp', 'user_name']
+        fields = ['id', 'user', 'timestamp', 'user_name']
