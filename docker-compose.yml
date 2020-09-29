@@ -21,5 +21,11 @@ services:
     depends_on:
       - db
 
+  avatar-generator:
+    image: stenrs/govatar-net:0.1.0
+    restart: always
+    ports:
+      - '8001:8000'
+
 volumes:
   dbdata:

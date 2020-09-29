@@ -86,8 +86,8 @@ function updateUserList(records) {
   records.forEach((user) => {
     var userString = `<li><a href="javascript:addRecordForUser(${user.id})">`;
 
-    if (user && user.img_url) {
-      userString += `<img src="${user.img_url}" alt="User Image" />`;
+    if (user && user.avatar) {
+      userString += `<img src="data:image/png;base64,${user.avatar}" alt="User Image" />`;
     } else {
       userString += `<img src="/static/dist/img/user1-128x128.jpg" alt="User Image" />`;
     }
@@ -116,7 +116,6 @@ $(document).ready(function () {
       url: '/recordable-users/',
       data: {
         name: $('#add-user-name').val(),
-        img_url: $('#add-user-img_url').val(),
       },
       success: function (data) {
         console.log('users: ', data);
