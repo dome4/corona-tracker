@@ -14,11 +14,11 @@ class RecordableUserSerializer(serializers.HyperlinkedModelSerializer):
             # random gender
             gender = None
             if bool(random.getrandbits(1)) is True:
-                gender = 'male'
+                gender = 'm'
             else:
-                gender = 'female'
+                gender = 'f'
 
-            url = 'http://avatar-generator:8000/' + gender + \
+            url = 'https://govatar.herokuapp.com/' + gender + \
                 '/' + validated_data['name'] + '.jpeg'
             response = requests.get(url)
 
